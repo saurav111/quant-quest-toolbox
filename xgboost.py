@@ -11,7 +11,7 @@ train = [pd.read_csv(os.path.join("abcd/historicalData",x),index_col=0) for x in
 
 train_numpy = [np.array(x) for x in train] 
 label_vecs = [np.sign(sth[0:sth.shape[0]-1,0] - sth[1:sth.shape[0],3]) for sth in train_numpy] #correct labels
-final_train_sets = [x[1:x.shape(0),:] for x in train_numpy] #can't look into the future
+final_train_sets = [x[1:x.shape[0],:] for x in train_numpy] #can't look into the future
 
 
 X = np.vstack(final_train_sets[0:len(final_train_sets)-1])
@@ -24,11 +24,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random
 clf = xgb.XGBClassifier()
 
 
-print("train the model")
+print("Training the model...")
 clf.fit(X_train, y_train)
 
-print("test score is")
-clf.score(X_test,y_test)
+print("Test score is")
+print(clf.score(X_test,y_test))
 #Close to random right now
 
 # Ideas for improvement 
